@@ -1,0 +1,42 @@
+{
+  "name": "react-todo",
+  "version": "1.0.0",
+  "description": "todo app react",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeibaiL/Todo-list-react.git"
+  },
+  "author": "Vladyslav Dubyna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HeibaiL/Todo-list-react/issues"
+  },
+  "homepage": "https://github.com/HeibaiL/Todo-list-react#readme",
+  "dependencies": {
+    "less": "^3.10.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^3.2.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^6.0.0",
+    "less-loader": "^5.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
