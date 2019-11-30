@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
+import Main from "./Main";
 
 export default class Footer extends Component{
     constructor(){
         super();
+        this.main=Main;
         this.state = {
             inputText:"",
             id:0
@@ -20,7 +22,8 @@ export default class Footer extends Component{
         this.setState({
             inputText: ""
         })
-        let todo = <Todo todo={text} id={this.state.id++}/>
+        console.log(this.main)
+        
     }
 
     render(){
