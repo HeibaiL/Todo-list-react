@@ -1,8 +1,7 @@
 import React from "react";
 
-let todos=[]
+let todos=[];
 export default function (getTodo){
-    console.log(getTodo)
     return (
         <div className="todo">
             <i className="far fa-circle icon"></i>
