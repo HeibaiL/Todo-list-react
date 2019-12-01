@@ -1,14 +1,16 @@
 import React from "react";
 
-
-export default function (props){
+let todos=[]
+export default function (getTodo){
+    console.log(getTodo)
     return (
         <div className="todo">
+            <i className="far fa-circle icon"></i>
             <p>
-                {props.todo}
+                {}
             </p>
             <p>
-                two icons <i className="far fa-circle circle"></i>
+                <i className="fas fa-times icon"></i>
                           {/* <i class="fas fa-check-circle"></i> */}
             </p>
         </div>

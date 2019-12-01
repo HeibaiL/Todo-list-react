@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import Todo from "./Todo";
 import Main from "./Main";
 
-export default class Footer extends Component{
-    constructor(){
+class Footer extends Component{
+    constructor(props){
         super();
-        this.main=Main;
+        this.getTodos=props.getTodos;
         this.state = {
             inputText:"",
-            id:0
+            id:0,
         }
     }
     handleInput=(event)=>{
@@ -18,14 +18,21 @@ export default class Footer extends Component{
             })
     }
     handleClick=()=>{
-        let text= this.state.inputText;
+        if(this.state.inputText==""){
+            return;
+        }else{
+        this.state.id++;
+        let todo={
+           text:this.state.inputText,
+           id:this.state.id,
+           done:false
+        }
+        this.getTodos(todo)
         this.setState({
             inputText: ""
         })
-        console.log(this.main)
-        
     }
-
+    }
     render(){
         return (
         <div className="footer">
@@ -37,3 +44,4 @@ export default class Footer extends Component{
         )
     }
 }
+export {Footer};
