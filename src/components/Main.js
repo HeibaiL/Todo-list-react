@@ -1,32 +1,39 @@
 import React, {Component} from "react";
-import Todo from "./Todo"
-import Footer from "./Footer"
+import Todo from "./Todo";
+import {Footer} from "./Footer";
+
+
 export default class Main extends Component{
-    constructor(Footer){
+    constructor(props){
         super();
-        this.Footer=Footer;
+        this.props=props;
         this.state={
-            todos:[{text:"Hello",id:1}],
-            renderTodo:[]
+            todos:this.props.todos,
+            todosArr:[]
+        }
+        this.handleClick=this.handleClick.bind(this)
+    }
+    componentDidUpdate(prevState){
+        if(!prevState.todos.length==this.state.todos.length){
+            this.todosArr=this.props.todos
+            this.setState({todos:this.todosArr})
+
         }
     }
-    componentDidMount(){
-        console.log(this.state.todos)
-    }
-    makeTodo(){
-        this.setState(()=>{
-          return {}  
-        })
+
+    handleClick(todo){
+    
     }
     render(){
+        let todos = this.state.todos.map(todo=>{
+            return <Todo onClick={()=>this.handleClick(todo)} getTodo={todo} key={todo.id}/>
+        })
+    
         return(
             <div className="main">
-                <div className="container" onChange={this.makeTodo}>
-                    {this.state.todos.map(todo=>{
-                        <Todo todo={todo.text} id={todo.id}/>
-                    })}
+                <div className="container">
+                  {todos}
                 </div>
-
             </div>
         );
     }
