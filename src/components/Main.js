@@ -11,6 +11,7 @@ export default class Main extends Component{
             todos:this.props.todos,
             todosArr:[]
         }
+        this.handleClick=this.handleClick.bind(this)
     }
     componentDidUpdate(prevState){
         if(!prevState.todos.length==this.state.todos.length){
@@ -19,10 +20,13 @@ export default class Main extends Component{
 
         }
     }
+
+    handleClick(todo){
     
+    }
     render(){
         let todos = this.state.todos.map(todo=>{
-            return <Todo getTodo={this.state.todos} key={todo.id}/>
+            return <Todo onClick={()=>this.handleClick(todo)} getTodo={todo} key={todo.id}/>
         })
     
         return(
