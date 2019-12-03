@@ -6,12 +6,12 @@ import {Footer} from "./Footer";
 export default class Main extends Component{
     constructor(props){
         super();
+        this.deleteTodo=props.deleteTodo;
         this.props=props;
         this.state={
             todos:this.props.todos,
             todosArr:[]
         }
-        this.handleClick=this.handleClick.bind(this)
     }
     componentDidUpdate(prevState){
         if(!prevState.todos.length==this.state.todos.length){
@@ -20,19 +20,16 @@ export default class Main extends Component{
 
         }
     }
-
-    handleClick(todo){
     
-    }
     render(){
-        let todos = this.state.todos.map(todo=>{
-            return <Todo onClick={()=>this.handleClick(todo)} getTodo={todo} key={todo.id}/>
+        this.todos = this.state.todos.map(todo=>{
+            return <Todo deleteTodo={this.deleteTodo} getTodo={todo} key={todo.id}/>
         })
     
         return(
             <div className="main">
                 <div className="container">
-                  {todos}
+                  {this.todos}
                 </div>
             </div>
         );
