@@ -9,7 +9,7 @@ export default class Todo extends React.Component{
             done:getTodo.getTodo.done,
             doneIcon:""
         }
-        this.changeState=this.changeState.bind(this);
+        this.changeState=this.changeState.bind(this)
     }
 
     changeState(){
