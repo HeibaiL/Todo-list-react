@@ -5,30 +5,31 @@ import {Footer} from "./Footer";
 
 export default class Main extends Component{
     constructor(props){
-        super();
-        this.deleteTodo=props.deleteTodo;
+        super(props);
         this.props=props;
-        this.state={
-            todos:this.props.todos,
-            todosArr:[]
+        this.state = {
+            todos:[],
+            todo:""
         }
     }
+
     componentDidUpdate(prevState){
         if(!prevState.todos.length==this.state.todos.length){
-            this.todosArr=this.props.todos
-            this.setState({todos:this.todosArr})
-
+            this.setState((state)=>{
+            return {
+                todos: state.todos.concat(this.props.todos)
+            }
         }
+    )}else{
+
     }
-    
+
+}
     render(){
-        this.todos = this.state.todos.map(todo=>{
-            return <Todo deleteTodo={this.deleteTodo} getTodo={todo} key={todo.id}/>
-        })
-    
+        this.gotTodo = this.props.todos
         return(
-            <div className="main">
-                <div className="container">
+            <div className = "main">
+                <div className = "container">
                   {this.todos}
                 </div>
             </div>
