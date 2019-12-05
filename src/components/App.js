@@ -18,9 +18,9 @@ export default class App extends React.Component{
                 gotTodo:state.gotTodo.concat(todo)
             }
         })
+   
     }
     render(){
-
         return <div className="app">
             <Header/>
             <Main todos={this.state.gotTodo}/>

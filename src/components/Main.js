@@ -9,28 +9,32 @@ export default class Main extends Component{
         this.props=props;
         this.state = {
             todos:[],
-            todo:""
+            todo:this.props.todoElements
         }
     }
-
     componentDidUpdate(prevState){
-        if(!prevState.todos.length==this.state.todos.length){
-            this.setState((state)=>{
-            return {
-                todos: state.todos.concat(this.props.todos)
-            }
+        this.todoElements = this.props.todos;
+        this.updateFunction(this.todoElements)
+    
+    }   
+    updateFunction=(el)=>{
+        const myTodo = el[el.length-1];
+        if(this.state.todos.length!==el.length){
+                this.setState((state)=>{
+                return {todos:state.todos.concat(myTodo)}
+            })
         }
-    )}else{
-
+        
     }
 
-}
     render(){
-        this.gotTodo = this.props.todos
+        let todoToDisplay = this.state.todos.map(todo=>{
+            return <Todo getTodo={todo} key ={todo.id}/>
+        })
         return(
             <div className = "main">
                 <div className = "container">
-                  {this.todos}
+                  {todoToDisplay}
                 </div>
             </div>
         );
