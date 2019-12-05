@@ -3,31 +3,42 @@ import React from "react";
 export default class Todo extends React.Component{
     constructor(getTodo){
         super(getTodo);
-        this.getTodo = getTodo;
         this.state={
-            todo: getTodo.getTodo,
-            doneIcon:""
+            text:getTodo.getTodo.text,
+            id:getTodo.getTodo.id,
+            done:getTodo.getTodo.done,
+            deleted:getTodo.getTodo.done,
+            doneIcon: ""
         }
         this.changeState=this.changeState.bind(this)
     }
-
     changeState(){
-        console.log(this.state.todo)
-        // this.setState(prevState=>{
-        //     return {
-        //         done:!prevState.done,
-        //         }
-        //     }
-        // )
+        this.setState(prevState=>{ 
+            if(prevState.done){
+                    return {
+                    done:!prevState.done,
+                    doneIcon:<i className="fas fa-check-circle icon"></i>
+                    }
+            }else{
+                return {
+                    done:!prevState.done,
+                    doneIcon:<i className="far fa-circle icon"></i>
+                    }
+             }
+     
+            }
+        )
     }
     render(){
+        let icon = this.state.doneIcon
+        console.log(icon)
         return (
         <div className="todo" onClick={this.changeState}>
-           {this.state.done?<i className="far fa-circle icon"></i>:<i className="fas fa-check-circle icon"></i>}
+        {<i className={icon}></i>}
            <p  style={{textDecoration:this.state.done?"none":"line-through"}}>
-                {this.state.todo.text}
+                {this.state.text}
             </p>
-            <p  onClick={this.func} className="delete">
+            <p  className="delete">
             <i className="fas fa-times icon"></i>               
             </p>
         </div>

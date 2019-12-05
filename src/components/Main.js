@@ -9,7 +9,6 @@ export default class Main extends Component{
         this.props=props;
         this.state = {
             todos:[],
-            todo:this.props.todoElements
         }
     }
     componentDidUpdate(prevState){
@@ -24,9 +23,7 @@ export default class Main extends Component{
                 return {todos:state.todos.concat(myTodo)}
             })
         }
-        
     }
-
     render(){
         let todoToDisplay = this.state.todos.map(todo=>{
             return <Todo getTodo={todo} key ={todo.id}/>
