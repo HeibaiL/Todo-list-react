@@ -15,7 +15,14 @@ export default class Main extends Component{
         this.todoElements = this.props.todos;
         this.updateFunction(this.todoElements)
     
-    }   
+    }  
+    deleteFunc=(id)=>{
+        this.state.todos.map(todo=>{
+            if(todo.id==id){
+                todo.deleted=!todo.deleted
+            }
+        })
+    } 
     updateFunction=(el)=>{
         const myTodo = el[el.length-1];
         if(this.state.todos.length!==el.length){
@@ -25,13 +32,18 @@ export default class Main extends Component{
         }
     }
     render(){
-        let todoToDisplay = this.state.todos.map(todo=>{
-            return <Todo getTodo={todo} key ={todo.id}/>
+         this.todoToDisplay = this.state.todos.map(todo=>{
+            if(todo.delete){
+                return;
+            }else{
+                return <Todo delete={this.deleteFunc} getTodo={todo} key ={todo.id}/>
+            }
+            
         })
         return(
             <div className = "main">
                 <div className = "container">
-                  {todoToDisplay}
+                  {this.todoToDisplay}
                 </div>
             </div>
         );
