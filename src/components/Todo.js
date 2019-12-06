@@ -42,9 +42,6 @@ export default class Todo extends React.Component{
         )
     }
     render(){
-     if(this.state.deleted){
-         return null;
-     }
         let icon = this.state.doneIcon
         return (
         <div className="todo" onClick={this.changeState}>
