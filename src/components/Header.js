@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
+
 export default function Header(){
     let date = new Date;
-    let newDate=date.toLocaleString(options);
     const options = {weekday:"long", month:"short", day:"numeric" }
     return (
         <div className="header">

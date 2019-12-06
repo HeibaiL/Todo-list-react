@@ -5,31 +5,45 @@ import {Footer} from "./Footer";
 
 export default class Main extends Component{
     constructor(props){
-        super();
-        this.deleteTodo=props.deleteTodo;
+        super(props);
         this.props=props;
-        this.state={
-            todos:this.props.todos,
-            todosArr:[]
+        this.state = {
+            todos:[],
         }
     }
     componentDidUpdate(prevState){
-        if(!prevState.todos.length==this.state.todos.length){
-            this.todosArr=this.props.todos
-            this.setState({todos:this.todosArr})
-
+        this.todoElements = this.props.todos;
+        this.updateFunction(this.todoElements)
+    
+    }  
+    deleteFunc=(id)=>{
+        this.state.todos.map(todo=>{
+            if(todo.id==id){
+                todo.deleted=!todo.deleted
+            }
+        })
+    } 
+    updateFunction=(el)=>{
+        const myTodo = el[el.length-1];
+        if(this.state.todos.length!==el.length){
+                this.setState((state)=>{
+                return {todos:state.todos.concat(myTodo)}
+            })
         }
     }
-    
     render(){
-        this.todos = this.state.todos.map(todo=>{
-            return <Todo deleteTodo={this.deleteTodo} getTodo={todo} key={todo.id}/>
+         this.todoToDisplay = this.state.todos.map(todo=>{
+            if(todo.delete){
+                return;
+            }else{
+                return <Todo delete={this.deleteFunc} getTodo={todo} key ={todo.id}/>
+            }
+            
         })
-    
         return(
-            <div className="main">
-                <div className="container">
-                  {this.todos}
+            <div className = "main">
+                <div className = "container">
+                  {this.todoToDisplay}
                 </div>
             </div>
         );

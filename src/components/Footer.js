@@ -11,21 +11,23 @@ class Footer extends Component{
             id:0,
         }
     }
-    handleInput=(event)=>{
+    handleInput = (event) => {
         let {name,value} = event.target;
         this.setState({
                 [name]: value
             })
     }
-    handleClick=()=>{
+    handleClick = () => {
         if(this.state.inputText==""){
             return;
         }else{
         this.state.id++;
-        let todo={
+        let todo = {
            text:this.state.inputText,
            id:this.state.id,
-           done:false
+           done:false,
+            deleted:false
+
         }
         this.getTodos(todo)
         this.setState({
