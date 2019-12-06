@@ -3,6 +3,8 @@ import React from "react";
 export default class Todo extends React.Component{
     constructor(getTodo){
         super(getTodo);
+        this.getTodo = getTodo;
+        this.deleteFunc = this.getTodo.delete;
         this.state={
             text:getTodo.getTodo.text,
             id:getTodo.getTodo.id,
@@ -12,7 +14,17 @@ export default class Todo extends React.Component{
         }
         this.changeState=this.changeState.bind(this)
     }
-    changeState(){
+    changeState(event){
+        let element = event.target;
+        if(element.classList.contains("fa-times")||element.parentElement.classList.contains("fa-times")){
+            this.deleteFunc(this.state.id)
+            this.setState(state=>{
+                return {
+                    deleted:!state.deleted}
+                }
+                )
+
+        }
         this.setState(prevState=>{ 
             if(prevState.done){
                     return {
@@ -30,17 +42,19 @@ export default class Todo extends React.Component{
         )
     }
     render(){
+     if(this.state.deleted){
+         return null;
+     }
         let icon = this.state.doneIcon
-        console.log(icon)
         return (
         <div className="todo" onClick={this.changeState}>
         {<i className={icon}></i>}
            <p  style={{textDecoration:this.state.done?"none":"line-through"}}>
                 {this.state.text}
             </p>
-            <p  className="delete">
-            <i className="fas fa-times icon"></i>               
-            </p>
+            <div  className="delete">
+            <i className="fas fa-times icon delete"></i>               
+            </div>
         </div>
       )
     }
