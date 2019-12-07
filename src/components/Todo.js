@@ -12,29 +12,22 @@ export default class Todo extends React.Component{
             deleted:getTodo.getTodo.done,
             doneIcon: ""
         }
-        this.changeState=this.changeState.bind(this)
     }
-    changeState(event){
+    changeState=(event)=>{
         let element = event.target;
         if(element.classList.contains("fa-times")||element.parentElement.classList.contains("fa-times")){
             this.deleteFunc(this.state.id)
-            this.setState(state=>{
-                return {
-                    deleted:!state.deleted}
-                }
-                )
-
         }
         this.setState(prevState=>{ 
             if(prevState.done){
                     return {
                     done:!prevState.done,
-                    doneIcon:<i className="fas fa-check-circle icon"></i>
+                    doneIcon:"fas fa-check-circle icon"
                     }
             }else{
                 return {
                     done:!prevState.done,
-                    doneIcon:<i className="far fa-circle icon"></i>
+                    doneIcon:"far fa-circle icon"
                     }
              }
      
@@ -42,11 +35,12 @@ export default class Todo extends React.Component{
         )
     }
     render(){
-        let icon = this.state.doneIcon
+        let icon = this.state.done? "fas fa-check-circle icon":"far fa-circle icon";
+        
         return (
         <div className="todo" onClick={this.changeState}>
-        {<i className={icon}></i>}
-           <p  style={{textDecoration:this.state.done?"none":"line-through"}}>
+           {<i className={icon}></i>}
+           <p  style={{textDecoration:this.state.done?"line-through":"none"}}>
                 {this.state.text}
             </p>
             <div  className="delete">

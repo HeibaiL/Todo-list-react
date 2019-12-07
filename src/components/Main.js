@@ -39,9 +39,9 @@ export default class Main extends Component{
         })
         return generatedTodo;
     }
-    updateFunction=(el)=>{
-        const myTodo = el[el.length-1];
-        if(this.state.todos.length!==el.length){
+    updateFunction=(elArray)=>{
+        const myTodo = elArray[elArray.length-1];
+        if(this.state.todos.length!==elArray.length){
                 this.setState((state)=>{
                 return {todos:state.todos.concat(myTodo)}
             })
