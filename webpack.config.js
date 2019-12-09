@@ -2,7 +2,7 @@ const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-    entry:"./src/index.js",
+    entry:["font-awesome/less/font-awesome.less","./src/index.js"],
     output: {
         path:path.join(__dirname,"todolist"),
         filename: "bundled.js"
@@ -30,19 +30,17 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'fonts/'
-                    }
-                    }
-                ]
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: 'url-loader',
+                options:{
+                    limit:8192,
+                    name:'[name].[ext]',
+                    outputPath:'assets'
+                }
+
             }
-        ]
-    },
+            ]
+        },
     plugins:[
         new HtmlWebpackPlugin({template:"./src/index.html"})]
 }

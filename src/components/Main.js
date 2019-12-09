@@ -1,60 +1,79 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+
 import Todo from "./Todo";
-import {Footer} from "./Footer";
 
-
-export default class Main extends Component{
-    constructor(props){
+class Main extends Component {
+    constructor(props) {
         super(props);
-        this.props=props;
+
         this.state = {
-            todos:[],
+            todos: [],
         }
     }
-    componentDidUpdate(prevState){
-        this.todoElements = this.props.todos;
-        this.updateFunction(this.todoElements)
-    
-    }  
-    deleteFunc=(id)=>{
-        this.setState(() => {
-       const updatedTodos = this.state.todos.map( todo => {
-            if(todo.id == id){
-                todo.deleted=!todo.deleted
-            }
-            return todo;
-            });
-            return {
-                todos:updatedTodos
-              }
-            }
-        )
-    } 
-    generateTodos=()=>{
-        const generatedTodo = this.state.todos.map(todo=>{
-            if(todo.deleted){
-                return;
-            }
-                return <Todo delete={this.deleteFunc} getTodo={todo} key ={todo.id}/>
-        })
-        return generatedTodo;
+
+    componentDidUpdate() {
+      this.updateFunction(this.props.todos)
+ 
     }
-    updateFunction=(elArray)=>{
-        const myTodo = elArray[elArray.length-1];
-        if(this.state.todos.length!==elArray.length){
-                this.setState((state)=>{
-                return {todos:state.todos.concat(myTodo)}
+
+    remove = (id) => {
+        this.setState((state) => ({
+            todos: state.todos.map(todo =>
+                todo.id === id ? { ...todo, deleted: true } : todo
+            )
+        }))
+    }
+
+    toggleDone = (id) => {
+        this.setState((state) => ({
+            todos: state.todos.map(todo => {
+                // console.log('todo', todo);
+                return todo.id === id ? { ...todo, done: !todo.done } : todo
             })
-        }
+        }))
+        // console.log('this.state', this.state)
     }
-    render(){
-        this.todoToDisplay = this.generateTodos();
-        return(
-            <div className = "main">
-                <div className = "container">
-                  {this.todoToDisplay}
+
+    generateTodos = () => this.state.todos.map(todo => {
+        const { id, deleted } = todo;
+        if (!deleted) {
+            return (
+                <Todo
+                    key={id}
+                    data={todo}
+                    remove={this.remove}
+                    toggleDone={this.toggleDone}
+                />
+            )
+        }
+    })
+
+    updateFunction = (arr) => {
+        const { todos } = this.state;
+       
+        const myTodo = arr[arr.length - 1];
+
+
+        if (todos.length !== arr.length) {
+            this.setState((state) => {      
+                return {
+                todos: state.todos.concat(myTodo)
+            }
+        })
+    }
+}
+
+    render() {
+        const todoToDisplay = this.generateTodos();
+
+        return (
+            <div className="main">
+                <div className="container">
+                    {todoToDisplay}
                 </div>
             </div>
         );
     }
 }
+
+export default Main;
