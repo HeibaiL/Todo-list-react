@@ -1,52 +1,43 @@
 import React from "react";
 
-export default class Todo extends React.Component{
-    constructor(getTodo){
-        super(getTodo);
-        this.getTodo = getTodo;
-        this.deleteFunc = this.getTodo.delete;
-        this.state={
-            text:getTodo.getTodo.text,
-            id:getTodo.getTodo.id,
-            done:getTodo.getTodo.done,
-            deleted:getTodo.getTodo.done,
-            doneIcon: ""
-        }
+export default class Todo extends React.Component {
+    constructor(props) {
+        super(props);
     }
-    changeState=(event)=>{
-        let element = event.target;
-        if(element.classList.contains("fa-times")||element.parentElement.classList.contains("fa-times")){
-            this.deleteFunc(this.state.id)
-        }
-        this.setState(prevState=>{ 
-            if(prevState.done){
-                    return {
-                    done:!prevState.done,
-                    doneIcon:"fas fa-check-circle icon"
-                    }
-            }else{
-                return {
-                    done:!prevState.done,
-                    doneIcon:"far fa-circle icon"
-                    }
-             }
-     
-            }
-        )
+
+    remove = () => {
+        const {
+            remove,
+            data: { id }
+        } = this.props;
+
+        remove(id);
     }
-    render(){
-        let icon = this.state.done? "fas fa-check-circle icon":"far fa-circle icon";
-        
+
+    toggleDone = () => {
+        const {
+            toggleDone,
+            data: { id }
+        } = this.props;
+
+        toggleDone(id);
+    }
+
+    render() {
+        const { data: { text, done } } = this.props;
+        const icon1 = <i className="fas fa-check-circle icon" key={1} />
+        const icon2 =  <i className="far fa-circle icon" key={2} />
+
         return (
-        <div className="todo" onClick={this.changeState}>
-           {<i className={icon}></i>}
-           <p  style={{textDecoration:this.state.done?"line-through":"none"}}>
-                {this.state.text}
-            </p>
-            <div  className="delete">
-            <i className="fas fa-times icon delete"></i>               
+            <div className="todo" onClick={this.toggleDone} >
+                {done ? icon1 : icon2}
+                <p style={{ textDecoration: done ? "line-through" : "none" }}>
+                    {text}
+                </p>
+                <div className="delete" onClick={this.remove}>
+                    <i className="fas fa-times icon delete" />
+                </div>
             </div>
-        </div>
-      )
+        )
     }
 }
