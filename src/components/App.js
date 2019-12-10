@@ -21,6 +21,7 @@ export default class App extends React.Component{
                 deleted:true
             }))
         }))
+
     }
 
     getTodos=(todo)=>{
