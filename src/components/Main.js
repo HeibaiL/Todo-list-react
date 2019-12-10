@@ -13,7 +13,6 @@ class Main extends Component {
 
     componentDidUpdate() {
       this.updateFunction(this.props.todos)
- 
     }
 
     remove = (id) => {
@@ -27,11 +26,9 @@ class Main extends Component {
     toggleDone = (id) => {
         this.setState((state) => ({
             todos: state.todos.map(todo => {
-                // console.log('todo', todo);
                 return todo.id === id ? { ...todo, done: !todo.done } : todo
             })
         }))
-        // console.log('this.state', this.state)
     }
 
     generateTodos = () => this.state.todos.map(todo => {
@@ -48,21 +45,18 @@ class Main extends Component {
         }
     })
 
-    updateFunction = (arr) => {
-        const { todos } = this.state;
-       
+    updateFunction = (arr) => { 
+        const { todos } = this.state;  
         const myTodo = arr[arr.length - 1];
 
-
         if (todos.length !== arr.length) {
-            this.setState((state) => {      
+            this.setState((state) => {    
                 return {
                 todos: state.todos.concat(myTodo)
             }
-        })
+          })
+         }
     }
-}
-
     render() {
         const todoToDisplay = this.generateTodos();
 
