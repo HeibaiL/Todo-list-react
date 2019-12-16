@@ -5,37 +5,15 @@ import Todo from "./Todo";
 class Main extends Component {
     constructor(props) {
         super(props);
-<<<<<<< HEAD
-=======
-
->>>>>>> iconChange
         this.state = {
             todos: [],
         }
     }
-<<<<<<< HEAD
-    componentDidUpdate(prevState){
-        this.updateFunction(this.props.todos)
-    
-    }  
-    deleteFunc=(id)=>{
-        this.setState(() => {
-       const updatedTodos = this.state.todos.map( todo => {
-            if(todo.id == id){
-                todo.deleted=!todo.deleted
-            }
-            return todo;
-            });
-            return {
-                todos:updatedTodos
-              }
-=======
 
     componentDidUpdate(prevProps) {
         if(this.props.todos.length==0){
             if(prevProps!==this.props){
                 this.setState({todos:[]})
->>>>>>> iconChange
             }
         }else{
       this.updateFunction(this.props.todos)
