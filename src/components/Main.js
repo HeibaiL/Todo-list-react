@@ -11,8 +11,14 @@ class Main extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        if(this.props.todos.length==0){
+            if(prevProps!==this.props){
+                this.setState({todos:[]})
+            }
+        }else{
       this.updateFunction(this.props.todos)
+        }
     }
 
     remove = (id) => {
@@ -25,39 +31,41 @@ class Main extends Component {
 
     toggleDone = (id) => {
         this.setState((state) => ({
-            todos: state.todos.map(todo => {
-                return todo.id === id ? { ...todo, done: !todo.done } : todo
-            })
+            todos: state.todos.map(todo => 
+               todo.id === id ? { ...todo, done: !todo.done } : todo
+            )
         }))
     }
 
-    generateTodos = () => this.state.todos.map(todo => {
-        const { id, deleted } = todo;
-        if (!deleted) {
-            return (
-                <Todo
-                    key={id}
-                    data={todo}
-                    remove={this.remove}
-                    toggleDone={this.toggleDone}
-                />
-            )
-        }
-    })
+    generateTodos = () =>{ 
+        return this.state.todos.map(todo => {
+            const { id, deleted } = todo;
+            if (!deleted) {
+                return (
+                    <Todo
+                        key={id}
+                        data={todo}
+                        remove={this.remove}
+                        toggleDone={this.toggleDone}
+                    />
+                )
+            }
+        })
+      }
 
-    updateFunction = (arr) => { 
+    updateFunction = (arr) => {
         const { todos } = this.state;  
         const myTodo = arr[arr.length - 1];
-
         if (todos.length !== arr.length) {
-            this.setState((state) => {    
-                return {
-                todos: state.todos.concat(myTodo)
-            }
-          })
+            this.setState((state) => (
+            { todos: state.todos.concat(myTodo) }
+            )
+            )
          }
     }
+
     render() {
+        console.log(this.state.todos)
         const todoToDisplay = this.generateTodos();
 
         return (

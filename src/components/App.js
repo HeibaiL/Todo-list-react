@@ -15,12 +15,7 @@ export default class App extends React.Component{
         }
     }
     refreshed=()=>{
-        this.setState(state=>({
-            todo:state.todo.map(todo=>({
-                ...todo,
-                deleted:true
-            }))
-        }))
+        this.setState({todo:[]})
 
     }
 
