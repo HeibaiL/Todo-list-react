@@ -6,14 +6,12 @@ import {Footer} from "./Footer";
 export default class Main extends Component{
     constructor(props){
         super(props);
-        this.props=props;
         this.state = {
             todos:[],
         }
     }
     componentDidUpdate(prevState){
-        this.todoElements = this.props.todos;
-        this.updateFunction(this.todoElements)
+        this.updateFunction(this.props.todos)
     
     }  
     deleteFunc=(id)=>{
