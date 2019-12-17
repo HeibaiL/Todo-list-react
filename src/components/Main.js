@@ -65,7 +65,7 @@ class Main extends Component {
     }
 
     render() {
-        console.log(this.state.todos)
+        console.log("this state todos", this.state.todos)
         const todoToDisplay = this.generateTodos();
 
         return (

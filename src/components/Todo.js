@@ -34,6 +34,9 @@ export default class Todo extends React.Component {
                 <p style={{ textDecoration: done ? "line-through" : "none" }}>
                     {text}
                 </p>
+                <div className="change">
+                    <i class="fas fa-redo-alt icon"></i>
+                </div>
                 <div className="delete" onClick={this.remove}>
                     <i className="fas fa-times icon delete" />
                 </div>
