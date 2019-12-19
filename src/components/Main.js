@@ -5,7 +5,6 @@ import Todo from "./Todo";
 class Main extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             todos: [],
         }
@@ -28,6 +27,14 @@ class Main extends Component {
             )
         }))
     }
+    changeTodo = (id)=> {
+        this.setState((state) => ({
+            todos:state.todos.map(todo=>{
+                return todo.id===id? { ...todo, deleted: true}: todo
+            })
+        }))
+
+    }
 
     toggleDone = (id) => {
         this.setState((state) => ({
@@ -47,6 +54,7 @@ class Main extends Component {
                         data={todo}
                         remove={this.remove}
                         toggleDone={this.toggleDone}
+                        changeTodo={this.changeTodo}
                     />
                 )
             }
@@ -65,7 +73,7 @@ class Main extends Component {
     }
 
     render() {
-        console.log("this state todos", this.state.todos)
+        // console.log("this state todos", this.state.todos)
         const todoToDisplay = this.generateTodos();
 
         return (

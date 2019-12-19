@@ -20,7 +20,7 @@ class Footer extends Component{
     handleClick = () => {
         if(this.state.inputText==""){
             return;
-        }else{
+        } else {
         this.state.id++;
         let todo = {
            text:this.state.inputText,
@@ -39,7 +39,7 @@ class Footer extends Component{
         return (
         <div className="footer">
             <div className="input"> 
-                <input name="inputText" placeholder="What to do?" type="text" value={this.state.inputText} onChange={this.handleInput}/>
+                <input name="inputText" id ="input-element" placeholder="What to do?" type="text" value={this.state.inputText} onChange={this.handleInput}/>
                 <button onClick={this.handleClick}>Click me!</button>
             </div>
         </div>
